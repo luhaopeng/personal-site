@@ -1,0 +1,19 @@
+.site-header {
+    background: #fff;
+    padding: 0;
+    box-shadow: 0 2px 8px #f0f1f2;
+    z-index: 1;
+}
+
+.site-footer {
+    color: #939393;
+    text-align: center;
+}
+
+.beian-link a {
+    color: inherit;
+}
+
+.beian-link {
+    padding: 10px 0;
+}
