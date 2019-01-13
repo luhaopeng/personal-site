@@ -2,7 +2,7 @@ import React from 'react'
 
 class Comment extends React.Component {
     render() {
-        return <div>comment</div>
+        return <div>测试评论</div>
     }
 }
 

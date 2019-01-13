@@ -16,6 +16,9 @@
     "react-svg": "^7.2.2"
   },
   "devDependencies": {
-    "babel-plugin-import": "^1.11.0"
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-import": "^1.11.0",
+    "eslint": "^5.12.0",
+    "eslint-plugin-react": "^7.12.3"
   }
 }

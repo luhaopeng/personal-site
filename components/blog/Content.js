@@ -10,7 +10,7 @@ class Content extends React.Component {
             <div className='blog-content'>
                 <Title
                     attr={{
-                        title: 'abc',
+                        title: '测试文章',
                         category: '文章',
                         tags: ['JavaScript', 'React'],
                         time: '2019-01-11 10:54:32',
