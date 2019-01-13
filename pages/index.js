@@ -32,18 +32,15 @@ export default () => (
                     href='http://www.miitbeian.gov.cn/'
                     target='_blank'
                     rel='noopener noreferrer'
-                    style={{ marginRight: '1rem' }}
                 >
                     浙ICP备19001505号-1
                 </a>
                 <a
-                    target='_blank'
                     href='http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011002013747'
+                    target='_blank'
+                    rel='noopener noreferrer'
                 >
-                    <img
-                        src='/static/img/beian.png'
-                        style={{ verticalAlign: 'bottom', marginRight: '2px' }}
-                    />
+                    <img src='/static/img/beian.png' />
                     浙公网安备 33011002013747号
                 </a>
             </div>
