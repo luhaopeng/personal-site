@@ -18,6 +18,10 @@
     color: inherit;
 }
 
+.beian-link a:focus {
+    text-decoration: none;
+}
+
 .beian-link a:not(:first-child) {
     margin-left: 1rem;
 }
