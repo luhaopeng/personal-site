@@ -3,11 +3,21 @@ import '../static/style/index.css'
 import { Layout, BackTop } from 'antd'
 import MyHeader from '../components/Header'
 import BlogContent from '../components/blog/Content'
+import Head from 'next/head'
 
 const { Header, Content, Footer } = Layout
 
 export default () => (
     <Layout>
+        <Head>
+            <title key='page-title'>卢浩鹏的技术日志</title>
+            <link
+                key='favicon'
+                rel='shortcut icon'
+                href='/static/img/favicon.ico'
+                type='image/x-icon'
+            />
+        </Head>
         <Header className='site-header'>
             <MyHeader />
         </Header>
