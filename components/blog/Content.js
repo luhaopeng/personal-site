@@ -10,6 +10,7 @@ class Content extends React.Component {
             <div className='blog-content'>
                 <Title
                     attr={{
+                        id: 1,
                         title: '测试文章',
                         category: '文章',
                         tags: ['JavaScript', 'React'],
