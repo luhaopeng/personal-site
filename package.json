@@ -1,24 +1,29 @@
 {
-  "name": "personal-site",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start -p 8000"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "@zeit/next-css": "^1.0.1",
-    "antd": "^3.12.1",
-    "next": "^7.0.2",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "react-svg": "^7.2.2"
-  },
-  "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "babel-plugin-import": "^1.11.0",
-    "eslint": "^5.12.0",
-    "eslint-plugin-react": "^7.12.3"
-  }
+    "name": "personal-site",
+    "version": "0.0.1",
+    "scripts": {
+        "dev": "next -p 8000",
+        "build": "next build",
+        "start": "next start -p 8000"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "@zeit/next-less": "^1.0.1",
+        "antd": "^3.13.0",
+        "axios": "^0.18.0",
+        "dayjs": "^1.8.0",
+        "less": "^3.9.0",
+        "marked": "^0.6.0",
+        "next": "^7.0.2",
+        "react": "^16.7.0",
+        "react-dom": "^16.7.0",
+        "react-svg": "^7.2.6"
+    },
+    "devDependencies": {
+        "babel-eslint": "^10.0.1",
+        "babel-plugin-import": "^1.11.0",
+        "css-loader": "^2.1.0",
+        "eslint": "^5.12.1",
+        "eslint-plugin-react": "^7.12.4"
+    }
 }

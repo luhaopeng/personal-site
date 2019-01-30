@@ -1,7 +1,9 @@
 import React from 'react'
 import { Tag } from 'antd'
-import './Title.css'
+import dayjs from 'dayjs'
+import './Title.less'
 
+const dateFormat = 'YYYY-MM-DD HH:mm:ss'
 class Title extends React.Component {
     render() {
         const { attr } = this.props
@@ -15,7 +17,8 @@ class Title extends React.Component {
                     </Tag>
                 ))}
                 <span style={{ color: '#999' }}>
-                    发表于 {attr.time} 阅读 {attr.read} 评论 {attr.comment}
+                    发表于 {dayjs(attr.time).format(dateFormat)}&nbsp;
+                    阅读 {attr.read} 评论 {attr.comment}
                 </span>
             </div>
         )

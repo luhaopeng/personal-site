@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Col, Menu, Icon } from 'antd'
 import Link from 'next/link'
 import ReactSVG from 'react-svg'
-import './Header.css'
+import './Header.less'
 
 const SubMenu = Menu.SubMenu
 const MenuItemGroup = Menu.ItemGroup

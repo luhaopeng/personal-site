@@ -1,5 +1,5 @@
-import '../static/style/default.css'
-import '../static/style/index.css'
+import '../static/style/default.less'
+import '../static/style/index.less'
 import { Layout, BackTop } from 'antd'
 import MyHeader from '../components/Header'
 import BlogContent from '../components/blog/Content'
@@ -22,7 +22,7 @@ export default () => (
             <MyHeader />
         </Header>
         <Content style={{ background: '#fff' }}>
-            <BlogContent />
+            <BlogContent id='5c50094ab45fe9411c3aae89' />
         </Content>
         <BackTop />
         <Footer className='site-footer'>
