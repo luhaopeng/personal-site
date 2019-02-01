@@ -1,7 +1,7 @@
 import React from 'react'
 import marked from 'marked'
-import './Article.less'
-import '../../static/style/markdown.less'
+import './index.less'
+import '../../../static/style/markdown.less'
 
 class Article extends React.Component {
     render() {

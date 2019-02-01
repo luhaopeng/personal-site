@@ -1,9 +1,9 @@
 import React from 'react'
-import Comment from './Comment'
-import Title from './Title'
-import Article from './Article'
-import './Content.less'
-import { readBlog } from '../../api/blog'
+import Comment from '../comment'
+import Title from '../title'
+import Article from '../article'
+import './index.less'
+import { readBlog } from '../../../api/blog'
 
 class Content extends React.Component {
     constructor(props) {

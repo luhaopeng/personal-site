@@ -1,9 +1,8 @@
-import '../static/style/default.less'
-import '../static/style/index.less'
 import { Layout, BackTop } from 'antd'
-import MyHeader from '../components/Header'
-import BlogContent from '../components/blog/Content'
 import Head from 'next/head'
+import SiteHeader from '../components/site-header'
+import BlogContent from '../components/blog/content'
+import '../static/style/index.less'
 
 const { Header, Content, Footer } = Layout
 
@@ -19,7 +18,7 @@ export default () => (
             />
         </Head>
         <Header className='site-header'>
-            <MyHeader />
+            <SiteHeader />
         </Header>
         <Content style={{ background: '#fff' }}>
             <BlogContent id='5c50094ab45fe9411c3aae89' />

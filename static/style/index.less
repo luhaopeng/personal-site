@@ -1,3 +1,6 @@
+@import 'default';
+@ant-header-line-height: 64px;
+
 .site-header {
     background: #fff;
     padding: 0;
@@ -28,4 +31,9 @@
             margin-right: 2px;
         }
     }
+}
+
+.full-height {
+    height: calc(100vh - @ant-header-line-height);
+    min-height: @ant-header-line-height;
 }

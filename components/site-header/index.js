@@ -2,12 +2,12 @@ import React from 'react'
 import { Row, Col, Menu, Icon } from 'antd'
 import Link from 'next/link'
 import ReactSVG from 'react-svg'
-import './Header.less'
+import './index.less'
 
 const SubMenu = Menu.SubMenu
 const MenuItemGroup = Menu.ItemGroup
 
-class Header extends React.Component {
+class SiteHeader extends React.Component {
     state = {
         current: 'home'
     }
@@ -27,7 +27,11 @@ class Header extends React.Component {
                 type='flex'
                 justify='space-between'
                 align='middle'
-                style={{ width: this.props.width || '80%', margin: '0 auto' }}
+                style={{
+                    width: this.props.width || '90%',
+                    margin: '0 auto',
+                    padding: '0 45px'
+                }}
             >
                 <Col>
                     <Link href='/'>
@@ -113,4 +117,4 @@ class Header extends React.Component {
     }
 }
 
-export default Header
+export default SiteHeader

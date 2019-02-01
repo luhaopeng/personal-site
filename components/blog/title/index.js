@@ -1,7 +1,7 @@
 import React from 'react'
 import { Tag } from 'antd'
 import dayjs from 'dayjs'
-import './Title.less'
+import './index.less'
 
 const dateFormat = 'YYYY-MM-DD HH:mm:ss'
 class Title extends React.Component {
