@@ -11,7 +11,19 @@ const data = [
     'Japanese princess to wed commoner.',
     'Australian walks 100km after outback crash.',
     'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.'
+    'Los Angeles battles huge wildfires.',
+    'Racing car sprays burning fuel into crowd.',
+    'Japanese princess to wed commoner.',
+    'Australian walks 100km after outback crash.',
+    'Man charged over missing wedding girl.',
+    'Racing car sprays burning fuel into crowd.',
+    'Japanese princess to wed commoner.',
+    'Australian walks 100km after outback crash.',
+    'Man charged over missing wedding girl.',
+    'Racing car sprays burning fuel into crowd.',
+    'Japanese princess to wed commoner.',
+    'Australian walks 100km after outback crash.',
+    'Man charged over missing wedding girl.'
 ]
 
 class Manage extends React.Component {
@@ -34,8 +46,8 @@ class Manage extends React.Component {
                     <Sider width={240} style={{ background: '#fff' }}>
                         <List
                             header={<div>Header</div>}
-                            footer={<div>Footer</div>}
                             bordered
+                            className='manage-blog-list'
                             dataSource={data}
                             renderItem={item => (
                                 <List.Item>
