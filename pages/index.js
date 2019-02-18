@@ -1,10 +1,11 @@
 import { Layout, BackTop } from 'antd'
 import Head from 'next/head'
+import '../static/style/index.less'
 import SiteHeader from '../components/site-header'
 import BlogContent from '../components/blog/content'
-import '../static/style/index.less'
+import SiteFooter from '../components/site-footer'
 
-const { Header, Content, Footer } = Layout
+const { Content } = Layout
 
 export default () => (
     <Layout>
@@ -17,32 +18,11 @@ export default () => (
                 type='image/x-icon'
             />
         </Head>
-        <Header className='site-header'>
-            <SiteHeader />
-        </Header>
+        <SiteHeader />
         <Content style={{ background: '#fff' }}>
             <BlogContent id='5c50094ab45fe9411c3aae89' />
         </Content>
         <BackTop />
-        <Footer className='site-footer'>
-            &copy; 2019 卢浩鹏
-            <div className='beian-link'>
-                <a
-                    href='http://www.miitbeian.gov.cn/'
-                    target='_blank'
-                    rel='noopener noreferrer'
-                >
-                    浙ICP备19001505号-1
-                </a>
-                <a
-                    href='http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011002013747'
-                    target='_blank'
-                    rel='noopener noreferrer'
-                >
-                    <img src='/static/img/beian.png' />
-                    浙公网安备 33011002013747号
-                </a>
-            </div>
-        </Footer>
+        <SiteFooter />
     </Layout>
 )

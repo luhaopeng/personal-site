@@ -4,29 +4,27 @@ import Head from 'next/head'
 import '../static/style/index.less'
 import SiteHeader from '../components/site-header'
 import ManageContent from '../components/manage-content'
+import SiteFooter from '../components/site-footer'
+import { getBlogList } from '../api/blog'
 
-const { Header, Sider, Footer } = Layout
-const data = [
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.',
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.'
-]
+const { Sider } = Layout
+let page = 0
 
 class Manage extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            blogList: []
+        }
+    }
+    async componentDidMount() {
+        let { data } = await getBlogList({ page })
+        let blogList = data.doc
+        this.setState({ blogList })
+    }
+    handleListClick = e => {
+        console.log(e.target) //eslint-disable-line
+    }
     render() {
         return (
             <Layout>
@@ -39,19 +37,23 @@ class Manage extends React.Component {
                         type='image/x-icon'
                     />
                 </Head>
-                <Header className='site-header'>
-                    <SiteHeader width='100%' />
-                </Header>
+                <SiteHeader width='100%' />
                 <Layout>
                     <Sider width={240} style={{ background: '#fff' }}>
                         <List
                             header={<div>Header</div>}
                             bordered
                             className='manage-blog-list'
-                            dataSource={data}
-                            renderItem={item => (
-                                <List.Item>
-                                    <a href='javascript:void 0;'>{item}</a>
+                            dataSource={this.state.blogList}
+                            renderItem={blog => (
+                                <List.Item
+                                    key={blog._id}
+                                    onClick={this.handleListClick}
+                                >
+                                    <List.Item.Meta
+                                        title={blog.title}
+                                        description={blog.time}
+                                    />
                                 </List.Item>
                             )}
                         />
@@ -59,26 +61,7 @@ class Manage extends React.Component {
                     <Layout>
                         <div className='full-height'>
                             <ManageContent />
-                            <Footer className='site-footer'>
-                                &copy; 2019 卢浩鹏
-                                <div className='beian-link'>
-                                    <a
-                                        href='http://www.miitbeian.gov.cn/'
-                                        target='_blank'
-                                        rel='noopener noreferrer'
-                                    >
-                                        浙ICP备19001505号-1
-                                    </a>
-                                    <a
-                                        href='http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011002013747'
-                                        target='_blank'
-                                        rel='noopener noreferrer'
-                                    >
-                                        <img src='/static/img/beian.png' />
-                                        浙公网安备 33011002013747号
-                                    </a>
-                                </div>
-                            </Footer>
+                            <SiteFooter />
                         </div>
                     </Layout>
                 </Layout>

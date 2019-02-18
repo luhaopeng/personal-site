@@ -263,7 +263,6 @@ class MdEditor extends React.Component {
                 <div className='for-editor'>
                     <div className={editorClass}>
                         <div className='for-editor-wrapper'>
-                            {/* <div className="for-editor-wrapper-in"> */}
                             <div className='for-editor-block'>
                                 {lineNum()}
                                 <div className='for-editor-content'>
@@ -276,7 +275,6 @@ class MdEditor extends React.Component {
                                     />
                                 </div>
                             </div>
-                            {/* </div> */}
                         </div>
                     </div>
                     <div className={previewClass}>
