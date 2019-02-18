@@ -1,6 +1,7 @@
 import React from 'react'
 import { Layout, List } from 'antd'
 import Head from 'next/head'
+import dayjs from 'dayjs'
 import '../static/style/index.less'
 import SiteHeader from '../components/site-header'
 import ManageContent from '../components/manage-content'
@@ -8,6 +9,7 @@ import SiteFooter from '../components/site-footer'
 import { getBlogList } from '../api/blog'
 
 const { Sider } = Layout
+const dateFormat = 'YYYY-MM-DD HH:mm:ss'
 let page = 0
 
 class Manage extends React.Component {
@@ -52,7 +54,9 @@ class Manage extends React.Component {
                                 >
                                     <List.Item.Meta
                                         title={blog.title}
-                                        description={blog.time}
+                                        description={dayjs(blog.time).format(
+                                            dateFormat
+                                        )}
                                     />
                                 </List.Item>
                             )}
