@@ -31,13 +31,7 @@ class Manage extends React.Component {
         return (
             <Layout>
                 <Head>
-                    <title key='page-title'>卢浩鹏的技术日志</title>
-                    <link
-                        key='favicon'
-                        rel='shortcut icon'
-                        href='/static/img/favicon.ico'
-                        type='image/x-icon'
-                    />
+                    <title key='page-title'>后台管理 - 卢浩鹏的技术日志</title>
                 </Head>
                 <SiteHeader width='100%' />
                 <Layout>

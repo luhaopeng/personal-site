@@ -11,12 +11,6 @@ export default () => (
     <Layout>
         <Head>
             <title key='page-title'>卢浩鹏的技术日志</title>
-            <link
-                key='favicon'
-                rel='shortcut icon'
-                href='/static/img/favicon.ico'
-                type='image/x-icon'
-            />
         </Head>
         <SiteHeader />
         <Content style={{ background: '#fff' }}>

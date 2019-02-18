@@ -1,6 +1,7 @@
 import React from 'react'
 import { Layout, Row, Col, Menu, Icon } from 'antd'
 import Link from 'next/link'
+import Head from 'next/head'
 import ReactSVG from 'react-svg'
 import './index.less'
 
@@ -25,6 +26,14 @@ class SiteHeader extends React.Component {
         }
         return (
             <Header className='site-header'>
+                <Head>
+                    <link
+                        key='favicon'
+                        rel='shortcut icon'
+                        href='/static/img/favicon.ico'
+                        type='image/x-icon'
+                    />
+                </Head>
                 <Row
                     type='flex'
                     justify='space-between'
