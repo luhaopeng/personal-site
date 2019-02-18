@@ -1,9 +1,9 @@
 import { Layout, BackTop } from 'antd'
 import Head from 'next/head'
 import '../static/style/index.less'
-import SiteHeader from '../components/site-header'
+import SiteHeader from '../components/site/header'
 import BlogContent from '../components/blog/content'
-import SiteFooter from '../components/site-footer'
+import SiteFooter from '../components/site/footer'
 
 const { Content } = Layout
 

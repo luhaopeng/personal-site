@@ -1,8 +1,8 @@
 import React from 'react'
 import { Row, Col, Layout, Input, Button, Select } from 'antd'
-import Editor from '../for-editor'
-import IconFont from '../iconfont'
-import { createBlog } from '../../api/blog'
+import Editor from '../../for-editor'
+import IconFont from '../../iconfont'
+import { createBlog } from '../../../api/blog'
 
 const { Content } = Layout
 const { Option } = Select
