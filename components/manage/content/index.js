@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Col, Layout, Input, Button, Select } from 'antd'
 import Editor from '../../for-editor'
 import IconFont from '../../iconfont'
-import { createBlog } from '../../../api/blog'
+import { readBlog, createBlog } from '../../../api/blog'
 
 const { Content } = Layout
 const { Option } = Select
@@ -10,8 +10,7 @@ const { Option } = Select
 class ManageContent extends React.Component {
     constructor(props) {
         super(props)
-        let { title, content, tags, category } = props
-        this.state = { title, content, tags, category: category || 'article' }
+        this.state = { title: '', content: '', tags: [], category: 'article' }
     }
 
     handleTitleChange = e => {
@@ -35,9 +34,24 @@ class ManageContent extends React.Component {
         createBlog({ title, content, tags, category }).catch(error => {
             let reason = error.response.data.msg
             if (/duplicate key/i.test(reason)) {
-                console.log('标题不能重复') //eslint-disable-line
+                console.log('标题不能重复') // eslint-disable-line
             }
         })
+    }
+
+    async componentWillReceiveProps(nextProps) {
+        if (nextProps.id) {
+            let { data } = await readBlog({ id: nextProps.id, fromManage: true })
+            let { title, content, tags, category } = data.doc
+            this.setState({ title, content, tags, category })
+        } else {
+            this.setState({
+                title: '',
+                content: '',
+                tags: [],
+                category: 'article'
+            })
+        }
     }
 
     render() {

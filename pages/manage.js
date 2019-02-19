@@ -15,16 +15,17 @@ class Manage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            blogList: []
+            blogList: [],
+            current: ''
         }
     }
-    async componentWillMount() {
+    async componentDidMount() {
         let { data } = await getBlogList({ page })
         let blogList = data.doc
         this.setState({ blogList })
     }
-    handleListClick = e => {
-        console.log(e.target) //eslint-disable-line
+    handleListClick = item => {
+        this.setState({ current: item._id })
     }
     render() {
         return (
@@ -35,11 +36,14 @@ class Manage extends React.Component {
                 <SiteHeader width='100%' />
                 <Layout>
                     <Sider width={240} theme='light'>
-                        <BlogList list={this.state.blogList} />
+                        <BlogList
+                            list={this.state.blogList}
+                            onClick={this.handleListClick}
+                        />
                     </Sider>
                     <Layout>
                         <div className='full-height'>
-                            <ManageContent />
+                            <ManageContent id={this.state.current} />
                             <SiteFooter />
                         </div>
                     </Layout>

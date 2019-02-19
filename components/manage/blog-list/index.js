@@ -5,7 +5,8 @@ import ListItem from './list-item'
 
 class ManageBlogList extends React.Component {
     handleClick = item => {
-        console.log(item._id) // eslint-disable-line
+        let { onClick } = this.props
+        !!onClick && typeof onClick === 'function' && onClick(item)
     }
     render() {
         return (
