@@ -10,22 +10,22 @@
     "dependencies": {
         "@zeit/next-css": "^1.0.1",
         "@zeit/next-less": "^1.0.1",
-        "antd": "^3.13.0",
+        "antd": "^3.13.4",
         "axios": "^0.18.0",
-        "dayjs": "^1.8.0",
-        "highlight.js": "^9.14.1",
+        "dayjs": "^1.8.6",
+        "highlight.js": "^9.14.2",
         "less": "^3.9.0",
         "marked": "^0.6.0",
-        "next": "^7.0.2",
-        "react": "^16.7.0",
-        "react-dom": "^16.7.0",
+        "next": "^8.0.1",
+        "react": "^16.8.2",
+        "react-dom": "^16.8.2",
         "react-svg": "^7.2.6"
     },
     "devDependencies": {
         "babel-eslint": "^10.0.1",
         "babel-plugin-import": "^1.11.0",
         "css-loader": "^2.1.0",
-        "eslint": "^5.12.1",
+        "eslint": "^5.14.1",
         "eslint-plugin-react": "^7.12.4"
     }
 }

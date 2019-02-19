@@ -34,7 +34,7 @@ class Manage extends React.Component {
                 </Head>
                 <SiteHeader width='100%' />
                 <Layout>
-                    <Sider width={240} style={{ background: '#fff' }}>
+                    <Sider width={240} theme='light'>
                         <BlogList list={this.state.blogList} />
                     </Sider>
                     <Layout>

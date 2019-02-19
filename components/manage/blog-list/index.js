@@ -1,25 +1,21 @@
 import React from 'react'
 import { List } from 'antd'
-import dayjs from 'dayjs'
 import './index.less'
-
-const dateFormat = 'YYYY-MM-DD HH:mm:ss'
+import ListItem from './list-item'
 
 class ManageBlogList extends React.Component {
+    handleClick = item => {
+        console.log(item._id) // eslint-disable-line
+    }
     render() {
         return (
             <List
-                header={<div>Header</div>}
                 bordered
                 className='manage-blog-list'
+                header={<div>Header</div>}
                 dataSource={this.props.list}
                 renderItem={blog => (
-                    <List.Item key={blog._id} onClick={this.handleListClick}>
-                        <List.Item.Meta
-                            title={blog.title}
-                            description={dayjs(blog.time).format(dateFormat)}
-                        />
-                    </List.Item>
+                    <ListItem item={blog} onClick={this.handleClick} />
                 )}
             />
         )
