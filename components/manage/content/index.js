@@ -108,7 +108,7 @@ class ManageContent extends React.Component {
         if (nextProps.id) {
             let { data } = await readBlog({
                 id: nextProps.id,
-                fromManage: true
+                fromManage: 'manage'
             })
             let { title, content, tags, category } = data.doc
             this.setState({ title, content, tags, category })

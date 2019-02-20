@@ -19,14 +19,21 @@ class Manage extends React.Component {
             current: ''
         }
     }
-    async componentDidMount() {
-        let { data } = await getBlogList({ page })
+
+    componentDidMount() {
+        this.refreshList()
+    }
+
+    refreshList = async (title = undefined) => {
+        let { data } = await getBlogList({ page, title })
         let blogList = data.doc
         this.setState({ blogList })
     }
+
     handleListClick = item => {
         this.setState({ current: item._id })
     }
+
     render() {
         return (
             <Layout>
@@ -39,6 +46,11 @@ class Manage extends React.Component {
                         <BlogList
                             list={this.state.blogList}
                             onClick={this.handleListClick}
+                            onSearch={this.refreshList}
+                            onAdd={() => {
+                                this.setState({ current: null })
+                            }}
+                            onRefresh={this.refreshList}
                         />
                     </Sider>
                     <Layout>

@@ -5,11 +5,11 @@ const ajax = axios.create({
     timeout: 10000
 })
 
-const getBlogList = data => ajax.get(`/bloglist/${data.page}`)
+const getBlogList = data => ajax.put(`/bloglist/${data.page}`, data)
 
 const createBlog = data => ajax.post('/blog', data)
 
-const readBlog = data => ajax.get(`/blog/${data.id}`, data)
+const readBlog = data => ajax.get(`/blog/${data.id}/${data.fromManage || '0'}`)
 
 const updateBlog = data => ajax.put(`/blog/${data.id}`, data)
 
