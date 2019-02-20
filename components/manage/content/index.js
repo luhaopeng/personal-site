@@ -1,8 +1,8 @@
 import React from 'react'
-import { Row, Col, Layout, Input, Button, Select } from 'antd'
+import { Row, Col, Layout, Input, Button, Select, message } from 'antd'
 import Editor from '../../for-editor'
 import IconFont from '../../iconfont'
-import { readBlog, createBlog } from '../../../api/blog'
+import { readBlog, createBlog, updateBlog } from '../../../api/blog'
 
 const { Content } = Layout
 const { Option } = Select
@@ -10,7 +10,15 @@ const { Option } = Select
 class ManageContent extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { title: '', content: '', tags: [], category: 'article' }
+        this.state = {
+            title: '',
+            content: '',
+            tags: [],
+            category: 'article',
+            publishing: false,
+            saving: false,
+            deleting: false
+        }
     }
 
     handleTitleChange = e => {
@@ -31,17 +39,77 @@ class ManageContent extends React.Component {
 
     handlePublish = () => {
         let { title, content, tags, category } = this.state
-        createBlog({ title, content, tags, category }).catch(error => {
-            let reason = error.response.data.msg
-            if (/duplicate key/i.test(reason)) {
-                console.log('标题不能重复') // eslint-disable-line
-            }
-        })
+        this.setState({ publishing: true })
+        if (this.props.id) {
+            updateBlog({
+                title,
+                content,
+                tags,
+                category,
+                id: this.props.id,
+                draft: false
+            })
+                .then(() => {
+                    message.success('发布成功')
+                })
+                .catch(error => {
+                    message.error(error.response.data.msg)
+                })
+                .then(() => {
+                    this.setState({ publishing: false })
+                })
+        } else {
+            createBlog({ title, content, tags, category, draft: false })
+                .catch(error => {
+                    let reason = error.response.data.msg
+                    if (/duplicate key/i.test(reason)) {
+                        message.error('标题不能重复')
+                    }
+                })
+                .then(() => {
+                    this.setState({ publishing: false })
+                })
+        }
+    }
+
+    handleSave = () => {
+        let { title, content, tags, category } = this.state
+        this.setState({ saving: true })
+        if (this.props.id) {
+            updateBlog({ title, content, tags, category, id: this.props.id })
+                .then(() => {
+                    message.success('草稿已保存')
+                })
+                .catch(error => {
+                    message.error(error.response.data.msg)
+                })
+                .then(() => {
+                    this.setState({ saving: false })
+                })
+        } else {
+            createBlog({ title, content, tags, category })
+                .then(() => {
+                    message.success('草稿已保存')
+                })
+                .catch(error => {
+                    let reason = error.response.data.msg
+                    if (/duplicate key/i.test(reason)) {
+                        message.error('标题不能重复')
+                    }
+                })
+                .then(() => {
+                    this.setState({ saving: false })
+                })
+        }
     }
 
     async componentWillReceiveProps(nextProps) {
+        if (nextProps.id === this.props.id) return
         if (nextProps.id) {
-            let { data } = await readBlog({ id: nextProps.id, fromManage: true })
+            let { data } = await readBlog({
+                id: nextProps.id,
+                fromManage: true
+            })
             let { title, content, tags, category } = data.doc
             this.setState({ title, content, tags, category })
         } else {
@@ -57,12 +125,7 @@ class ManageContent extends React.Component {
     render() {
         return (
             <Content style={{ margin: 20 }}>
-                <Row
-                    type='flex'
-                    justify='space-between'
-                    align='middle'
-                    gutter={16}
-                >
+                <Row type='flex' justify='space-between' align='middle'>
                     <Col style={{ flex: '1' }}>
                         <Input
                             value={this.state.title}
@@ -70,31 +133,6 @@ class ManageContent extends React.Component {
                             onChange={this.handleTitleChange}
                             placeholder='文章标题'
                         />
-                    </Col>
-                    <Col>
-                        <Button
-                            size='large'
-                            type='primary'
-                            onClick={this.handlePublish}
-                        >
-                            <IconFont type='icon-publish' />
-                            发布
-                        </Button>
-                    </Col>
-                    <Col>
-                        <Button size='large' icon='save'>
-                            保存
-                        </Button>
-                    </Col>
-                    <Col>
-                        <Button size='large' icon='export'>
-                            导出
-                        </Button>
-                    </Col>
-                    <Col>
-                        <Button size='large' type='danger' icon='delete'>
-                            删除
-                        </Button>
                     </Col>
                 </Row>
                 <Row
@@ -124,6 +162,37 @@ class ManageContent extends React.Component {
                             placeholder='标签'
                             tokenSeparators={[',']}
                         />
+                    </Col>
+                    <Col>
+                        <Button
+                            type='primary'
+                            onClick={this.handlePublish}
+                            loading={this.state.publishing}
+                        >
+                            <IconFont type='icon-publish' />
+                            发布
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Button
+                            icon='save'
+                            onClick={this.handleSave}
+                            loading={this.state.saving}
+                        >
+                            保存
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Button icon='export'>导出</Button>
+                    </Col>
+                    <Col>
+                        <Button
+                            type='danger'
+                            icon='delete'
+                            loading={this.state.deleting}
+                        >
+                            删除
+                        </Button>
                     </Col>
                 </Row>
                 <Editor

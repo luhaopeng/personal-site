@@ -1,7 +1,7 @@
 import React from 'react'
 import { List } from 'antd'
 import './index.less'
-import ListItem from './list-item'
+import ListItem from './item'
 
 class ManageBlogList extends React.Component {
     handleClick = item => {

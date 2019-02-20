@@ -1,5 +1,5 @@
 import React from 'react'
-import { List } from 'antd'
+import { List,Tag } from 'antd'
 import dayjs from 'dayjs'
 import './index.less'
 
@@ -15,7 +15,8 @@ class ListItem extends React.Component {
         return (
             <List.Item onClick={this.handleClick} className='blog-list'>
                 <div>
-                    <b>{blog.title}</b>
+                    <b>{blog.title} </b>
+                    {blog.draft ? <Tag>草稿</Tag> : null}
                     <div className='time'>
                         {dayjs(blog.time).format(dateFormat)}
                     </div>

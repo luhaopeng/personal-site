@@ -46,6 +46,12 @@ class MdEditor extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.value !== this.props.value) {
+            this.handleLineIndex(nextProps.value)
+        }
+    }
+
     // 输入框改变
     handleChange = e => {
         const value = e.target.value
@@ -177,7 +183,7 @@ class MdEditor extends React.Component {
         }
 
         return (
-            <div className={fullscreen} style={{ height: this.props.height }}>
+            <div className={fullscreen}>
                 <div className='for-controlbar'>
                     <ul>
                         <li onClick={this.undo} title='上一步 (ctrl+z)'>
@@ -235,11 +241,7 @@ class MdEditor extends React.Component {
                         >
                             <IconFont type='icon-code' />
                         </li>
-                        <li
-                            data-type='code'
-                            onClick={this.save}
-                            title='保存 (ctrl+s)'
-                        >
+                        <li onClick={this.save} title='保存 (ctrl+s)'>
                             <IconFont type='icon-save' />
                         </li>
                     </ul>
