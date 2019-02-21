@@ -1,18 +1,18 @@
 import axios from 'axios'
 
 const ajax = axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: 'http://localhost:3000/blog/',
     timeout: 10000
 })
 
-const getBlogList = data => ajax.put(`/bloglist/${data.page}`, data)
+const getBlogList = data => ajax.put(`/list/${data.page}`, data)
 
-const createBlog = data => ajax.post('/blog', data)
+const createBlog = data => ajax.post('/', data)
 
-const readBlog = data => ajax.get(`/blog/${data.id}/${data.fromManage || '0'}`)
+const readBlog = data => ajax.get(`/${data.id}/${data.fromManage}`)
 
-const updateBlog = data => ajax.put(`/blog/${data.id}`, data)
+const updateBlog = data => ajax.put(`/${data.id}`, data)
 
-const deleteBlog = data => ajax.delete(`/blog/${data.id}`, data)
+const deleteBlog = data => ajax.delete(`/${data.id}`, data)
 
 export { getBlogList, createBlog, readBlog, updateBlog, deleteBlog }
