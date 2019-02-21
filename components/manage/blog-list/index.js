@@ -20,11 +20,6 @@ class ManageBlogList extends React.Component {
         !!onAdd && typeof onAdd === 'function' && onAdd()
     }
 
-    handleRefresh = () => {
-        let { onRefresh } = this.props
-        !!onRefresh && typeof onRefresh === 'function' && onRefresh()
-    }
-
     render() {
         return (
             <List
@@ -35,7 +30,6 @@ class ManageBlogList extends React.Component {
                     <ListHeader
                         onSearch={this.handleSearch}
                         onAdd={this.handleAdd}
-                        onRefresh={this.handleRefresh}
                     />
                 }
                 dataSource={this.props.list}

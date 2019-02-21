@@ -14,11 +14,6 @@ class ListHeader extends React.Component {
         !!onAdd && typeof onAdd === 'function' && onAdd()
     }
 
-    handleRefresh = () => {
-        let { onRefresh } = this.props
-        !!onRefresh && typeof onRefresh === 'function' && onRefresh()
-    }
-
     render() {
         return (
             <div>
@@ -30,10 +25,7 @@ class ListHeader extends React.Component {
                         />
                     </Col>
                     <Col>
-                        <Button.Group>
-                            <Button icon='plus' onClick={this.handleAdd} />
-                            <Button icon='sync' onClick={this.handleRefresh} />
-                        </Button.Group>
+                        <Button icon='plus' onClick={this.handleAdd} />
                     </Col>
                 </Row>
             </div>

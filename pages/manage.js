@@ -50,7 +50,6 @@ class Manage extends React.Component {
                             onAdd={() => {
                                 this.setState({ current: null })
                             }}
-                            onRefresh={this.refreshList}
                         />
                     </Sider>
                     <Layout>
