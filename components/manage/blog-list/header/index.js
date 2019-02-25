@@ -4,16 +4,6 @@ import { Input, Row, Col, Button } from 'antd'
 const Search = Input.Search
 
 class ListHeader extends React.Component {
-    handleSearch = value => {
-        let { onSearch } = this.props
-        !!onSearch && typeof onSearch === 'function' && onSearch(value.trim())
-    }
-
-    handleAdd = () => {
-        let { onAdd } = this.props
-        !!onAdd && typeof onAdd === 'function' && onAdd()
-    }
-
     render() {
         return (
             <div>
@@ -21,11 +11,11 @@ class ListHeader extends React.Component {
                     <Col style={{ flex: '1' }}>
                         <Search
                             placeholder='搜索标题'
-                            onSearch={this.handleSearch}
+                            onSearch={this.props.onSearch}
                         />
                     </Col>
                     <Col>
-                        <Button icon='plus' onClick={this.handleAdd} />
+                        <Button icon='plus' onClick={this.props.onAdd} />
                     </Col>
                 </Row>
             </div>

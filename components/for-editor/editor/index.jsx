@@ -241,9 +241,9 @@ class MdEditor extends React.Component {
                         >
                             <IconFont type='icon-code' />
                         </li>
-                        <li onClick={this.save} title='保存 (ctrl+s)'>
+                        {/* <li onClick={this.save} title='保存 (ctrl+s)'>
                             <IconFont type='icon-save' />
-                        </li>
+                        </li> */}
                     </ul>
                     <ul>
                         <li className={expandActive} onClick={this.expand}>

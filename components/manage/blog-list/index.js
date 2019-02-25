@@ -5,21 +5,6 @@ import ListItem from './item'
 import ListHeader from './header'
 
 class ManageBlogList extends React.Component {
-    handleClick = item => {
-        let { onClick } = this.props
-        !!onClick && typeof onClick === 'function' && onClick(item)
-    }
-
-    handleSearch = value => {
-        let { onSearch } = this.props
-        !!onSearch && typeof onSearch === 'function' && onSearch(value)
-    }
-
-    handleAdd = () => {
-        let { onAdd } = this.props
-        !!onAdd && typeof onAdd === 'function' && onAdd()
-    }
-
     render() {
         return (
             <List
@@ -28,13 +13,13 @@ class ManageBlogList extends React.Component {
                 className='manage-blog-list'
                 header={
                     <ListHeader
-                        onSearch={this.handleSearch}
-                        onAdd={this.handleAdd}
+                        onSearch={this.props.onSearch}
+                        onAdd={this.props.onAdd}
                     />
                 }
                 dataSource={this.props.list}
                 renderItem={blog => (
-                    <ListItem item={blog} onClick={this.handleClick} />
+                    <ListItem item={blog} onClick={this.props.onClick} />
                 )}
             />
         )

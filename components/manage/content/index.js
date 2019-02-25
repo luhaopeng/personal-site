@@ -41,14 +41,17 @@ class ManageContent extends React.Component {
         let { title, content, tags, category } = this.state
         this.setState({ publishing: true })
         if (this.props.id) {
-            updateBlog({
-                title,
-                content,
-                tags,
-                category,
-                id: this.props.id,
-                draft: false
-            })
+            updateBlog(
+                {
+                    title,
+                    content,
+                    tags,
+                    category,
+                    id: this.props.id,
+                    draft: false
+                },
+                { auth: this.props.auth }
+            )
                 .then(() => {
                     message.success('发布成功')
                 })
@@ -59,7 +62,10 @@ class ManageContent extends React.Component {
                     this.setState({ publishing: false })
                 })
         } else {
-            createBlog({ title, content, tags, category, draft: false })
+            createBlog(
+                { title, content, tags, category, draft: false },
+                { auth: this.props.auth }
+            )
                 .catch(error => {
                     let reason = error.response.data.msg
                     if (/duplicate key/i.test(reason)) {
@@ -76,18 +82,25 @@ class ManageContent extends React.Component {
         let { title, content, tags, category } = this.state
         this.setState({ saving: true })
         if (this.props.id) {
-            updateBlog({ title, content, tags, category, id: this.props.id })
+            updateBlog(
+                { title, content, tags, category, id: this.props.id },
+                { auth: this.props.auth }
+            )
                 .then(() => {
                     message.success('草稿已保存')
                 })
                 .catch(error => {
+                    console.log(error) // eslint-disable-line
                     message.error(error.response.data.msg)
                 })
                 .then(() => {
                     this.setState({ saving: false })
                 })
         } else {
-            createBlog({ title, content, tags, category })
+            createBlog(
+                { title, content, tags, category },
+                { auth: this.props.auth }
+            )
                 .then(() => {
                     message.success('草稿已保存')
                 })
@@ -106,10 +119,14 @@ class ManageContent extends React.Component {
     async componentWillReceiveProps(nextProps) {
         if (nextProps.id === this.props.id) return
         if (nextProps.id) {
-            let { data } = await readBlog({
-                id: nextProps.id,
-                fromManage: 'manage'
-            })
+            let { data } = await readBlog(
+                {
+                    id: nextProps.id
+                },
+                {
+                    from: 'manage'
+                }
+            )
             let { title, content, tags, category } = data.doc
             this.setState({ title, content, tags, category })
         } else {

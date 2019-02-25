@@ -1,0 +1,30 @@
+@primary-color: #40a9ff;
+@hint-color: #e8e8e8;
+@error-color: #f5222d;
+
+.hidden-input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    padding: 0;
+    border: none;
+}
+
+.digit {
+    width: 40px;
+    height: 60px;
+    line-height: 60px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.5rem;
+    border-bottom: solid 1.5px @hint-color;
+    transition: border 0.5s;
+
+    &.focus {
+        border-bottom-color: @primary-color;
+    }
+
+    &.error {
+        border-bottom-color: @error-color;
+    }
+}
