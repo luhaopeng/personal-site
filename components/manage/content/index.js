@@ -90,7 +90,6 @@ class ManageContent extends React.Component {
                     message.success('草稿已保存')
                 })
                 .catch(error => {
-                    console.log(error) // eslint-disable-line
                     message.error(error.response.data.msg)
                 })
                 .then(() => {

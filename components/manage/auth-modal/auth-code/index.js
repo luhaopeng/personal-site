@@ -44,8 +44,8 @@ class AuthCode extends React.Component {
         return (
             <Row
                 style={{ margin: '20px 20px 0' }}
-                type="flex"
-                justify="space-between"
+                type='flex'
+                justify='space-between'
                 gutter={16}
                 onClick={this.handleFocus}
             >
@@ -66,12 +66,12 @@ class AuthCode extends React.Component {
                 ))}
                 <input
                     autoFocus
-                    type="text"
+                    type='text'
                     maxLength={this.props.length}
                     value={this.state.value}
                     onChange={this.handleInput}
-                    autoComplete="off"
-                    className="hidden-input"
+                    autoComplete='off'
+                    className='hidden-input'
                     ref={input => {
                         this.hiddenInput = input
                     }}

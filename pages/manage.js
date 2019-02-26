@@ -11,8 +11,8 @@ import { getBlogList } from '../api/blog'
 import { verify } from '../api/auth'
 
 const { Sider } = Layout
-let page = 0,
-    per_page = 5
+let page = 0 // blog list 分页
+const per_page = 5 // blog list 每页数量
 
 class Manage extends React.Component {
     constructor(props) {
@@ -27,44 +27,43 @@ class Manage extends React.Component {
     }
 
     refreshList = async (title = undefined) => {
-        let { data } = await getBlogList({
-            page,
-            per_page,
-            title,
-            auth: this.state.auth
-        })
-        let blogList = data.doc
-        this.setState({ blogList })
+        try {
+            let res = await getBlogList({
+                page,
+                per_page,
+                title,
+                auth: this.state.auth
+            })
+            let blogList = res.data.doc
+            this.setState({ blogList })
+        } catch (error) {
+            if (error.response.status === 401) {
+                message.error('登录过期，请重新登录')
+            }
+        }
     }
 
     handleListClick = item => {
         this.setState({ current: item._id })
     }
 
-    /* eslint-disable */
-
-    handleAuth = value => {
-        // verify
-        verify({ token: value })
-            .then(res => {
-                this.setState({
-                    showModal: false,
-                    auth: res.data.auth
-                })
-                message.success('登录成功')
-                this.refreshList()
+    handleAuth = async value => {
+        try {
+            let res = await verify({ token: value })
+            this.setState({
+                showModal: false,
+                auth: res.data.auth
             })
-            .catch(error => {
-                console.log('verify fail ---: %o', error)
+            message.success('登录成功')
+            this.refreshList()
+        } catch (error) {
+            if (error.response.status === 401) {
                 this.setState({
                     verifyError: true
                 })
-            })
-        // if - success - set auth - hide modal - show message - query blog list
-        // if - error - set error
+            }
+        }
     }
-
-    /* eslint-enable */
 
     render() {
         return (

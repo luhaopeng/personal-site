@@ -13,11 +13,10 @@ class Content extends React.Component {
         }
     }
     async componentDidMount() {
-        let { data } = await readBlog({ id: this.props.id })
-        let { doc } = data
+        let res = await readBlog({ id: this.props.id })
         this.setState({
             isLoaded: true,
-            ...doc
+            ...res.data.doc
         })
     }
     render() {
