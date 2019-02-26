@@ -3,6 +3,7 @@ import { Row, Col, Layout, Input, Button, Select, message } from 'antd'
 import Editor from '../../for-editor'
 import IconFont from '../../iconfont'
 import { readBlog, createBlog, updateBlog } from '../../../api/blog'
+import { errorMsg } from '../../../utils/common'
 
 const { Content } = Layout
 const { Option } = Select
@@ -56,7 +57,7 @@ class ManageContent extends React.Component {
                     message.success('发布成功')
                 })
                 .catch(error => {
-                    message.error(error.response.data.msg)
+                    message.error(errorMsg(error))
                 })
                 .then(() => {
                     this.setState({ publishing: false })
@@ -67,10 +68,7 @@ class ManageContent extends React.Component {
                 { auth: this.props.auth }
             )
                 .catch(error => {
-                    let reason = error.response.data.msg
-                    if (/duplicate key/i.test(reason)) {
-                        message.error('标题不能重复')
-                    }
+                    message.error(errorMsg(error))
                 })
                 .then(() => {
                     this.setState({ publishing: false })
@@ -90,7 +88,7 @@ class ManageContent extends React.Component {
                     message.success('草稿已保存')
                 })
                 .catch(error => {
-                    message.error(error.response.data.msg)
+                    message.error(errorMsg(error))
                 })
                 .then(() => {
                     this.setState({ saving: false })
@@ -104,10 +102,7 @@ class ManageContent extends React.Component {
                     message.success('草稿已保存')
                 })
                 .catch(error => {
-                    let reason = error.response.data.msg
-                    if (/duplicate key/i.test(reason)) {
-                        message.error('标题不能重复')
-                    }
+                    message.error(errorMsg(error))
                 })
                 .then(() => {
                     this.setState({ saving: false })

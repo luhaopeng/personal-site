@@ -12,4 +12,19 @@ const toQueryString = obj => {
         .join('&')
 }
 
-export { toQueryString }
+const errorMsg = error => {
+    let { response } = error
+    switch (response.status) {
+        case 400:
+            if (/duplicate key/i.test(response.data.msg)) {
+                return '标题不能重复'
+            }
+            return response.data.msg
+        case 401:
+            return '登录过期，请重新登录'
+        default:
+            return response.data.msg
+    }
+}
+
+export { toQueryString, errorMsg }

@@ -9,6 +9,7 @@ import BlogList from '../components/manage/blog-list'
 import SiteFooter from '../components/site/footer'
 import { getBlogList } from '../api/blog'
 import { verify } from '../api/auth'
+import { errorMsg } from '../utils/common'
 
 const { Sider } = Layout
 let page = 0 // blog list 分页
@@ -37,9 +38,7 @@ class Manage extends React.Component {
             let blogList = res.data.doc
             this.setState({ blogList })
         } catch (error) {
-            if (error.response.status === 401) {
-                message.error('登录过期，请重新登录')
-            }
+            message.error(errorMsg(error))
         }
     }
 
@@ -69,16 +68,16 @@ class Manage extends React.Component {
         return (
             <Layout>
                 <Head>
-                    <title key="page-title">后台管理 - 卢浩鹏的技术日志</title>
+                    <title key='page-title'>后台管理 - 卢浩鹏的技术日志</title>
                 </Head>
-                <SiteHeader width="100%" />
+                <SiteHeader width='100%' />
                 <AuthModal
                     visible={this.state.showModal}
                     onComplete={this.handleAuth}
                     error={this.state.verifyError}
                 />
                 <Layout>
-                    <Sider width={240} theme="light">
+                    <Sider width={240} theme='light'>
                         <BlogList
                             list={this.state.blogList}
                             onClick={this.handleListClick}
@@ -89,7 +88,7 @@ class Manage extends React.Component {
                         />
                     </Sider>
                     <Layout>
-                        <div className="full-height">
+                        <div className='full-height'>
                             <ManageContent
                                 id={this.state.current}
                                 auth={this.state.auth}
