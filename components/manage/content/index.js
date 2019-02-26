@@ -112,7 +112,6 @@ class ManageContent extends React.Component {
 
     async componentWillReceiveProps(nextProps) {
         if (nextProps.id === this.props.id) return
-        console.log('receive: %s',nextProps.id) //eslint-disable-line
         if (nextProps.id) {
             let { data } = await readBlog(
                 {
