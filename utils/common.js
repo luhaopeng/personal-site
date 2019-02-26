@@ -14,6 +14,7 @@ const toQueryString = obj => {
 
 const errorMsg = error => {
     let { response } = error
+    console.log(response) // eslint-disable-line
     switch (response.status) {
         case 400:
             if (/duplicate key/i.test(response.data.msg)) {
@@ -23,7 +24,7 @@ const errorMsg = error => {
         case 401:
             return '登录过期，请重新登录'
         default:
-            return response.data.msg
+            return response.message
     }
 }
 

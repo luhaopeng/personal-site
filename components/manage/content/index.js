@@ -11,25 +11,28 @@ import {
 } from 'antd'
 import Editor from '../../for-editor'
 import IconFont from '../../iconfont'
-import { readBlog, createBlog, updateBlog } from '../../../api/blog'
+import { readBlog, createBlog, updateBlog, deleteBlog } from '../../../api/blog'
 import { errorMsg } from '../../../utils/common'
 import { saveAs } from 'file-saver'
 
 const { Content } = Layout
 const { Option } = Select
 
+const initialState = {
+    title: '',
+    content: '',
+    tags: [],
+    category: 'article',
+    publishing: false,
+    saving: false,
+    deleting: false,
+    confirmVisible: false
+}
+
 class ManageContent extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            title: '',
-            content: '',
-            tags: [],
-            category: 'article',
-            publishing: false,
-            saving: false,
-            deleting: false
-        }
+        this.state = initialState
     }
 
     handleTitleChange = e => {
@@ -128,7 +131,23 @@ class ManageContent extends React.Component {
     }
 
     handleDelete = () => {
-        console.log('delete') // eslint-disable-line
+        this.setState({ deleting: true })
+        deleteBlog({ id: this.props.id }, { auth: this.props.auth })
+            .then(() => {
+                message.success('文章已删除')
+            })
+            .catch(error => {
+                message.error(errorMsg(error))
+            })
+            .then(() => {
+                this.setState({ deleting: false })
+            })
+    }
+
+    handleConfirmVisible = visible => {
+        if (!visible || this.props.id) {
+            this.setState({ confirmVisible: visible })
+        }
     }
 
     async componentWillReceiveProps(nextProps) {
@@ -145,12 +164,7 @@ class ManageContent extends React.Component {
             let { title, content, tags, category } = data.doc
             this.setState({ title, content, tags, category })
         } else {
-            this.setState({
-                title: '',
-                content: '',
-                tags: [],
-                category: 'article'
-            })
+            this.setState(initialState)
         }
     }
 
@@ -221,13 +235,18 @@ class ManageContent extends React.Component {
                     </Col>
                     <Col>
                         <Popconfirm
+                            visible={this.state.confirmVisible}
                             title='删除结果不可撤销'
                             onConfirm={this.handleDelete}
+                            onVisibleChange={this.handleConfirmVisible}
+                            okText='删除'
+                            cancelText='取消'
                         >
                             <Button
                                 type='danger'
                                 icon='delete'
                                 loading={this.state.deleting}
+                                disabled={!this.props.id}
                             >
                                 删除
                             </Button>
