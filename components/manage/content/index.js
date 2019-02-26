@@ -1,5 +1,14 @@
 import React from 'react'
-import { Row, Col, Layout, Input, Button, Select, message } from 'antd'
+import {
+    Row,
+    Col,
+    Layout,
+    Input,
+    Button,
+    Select,
+    message,
+    Popconfirm
+} from 'antd'
 import Editor from '../../for-editor'
 import IconFont from '../../iconfont'
 import { readBlog, createBlog, updateBlog } from '../../../api/blog'
@@ -118,6 +127,10 @@ class ManageContent extends React.Component {
         saveAs(file)
     }
 
+    handleDelete = () => {
+        console.log('delete') // eslint-disable-line
+    }
+
     async componentWillReceiveProps(nextProps) {
         if (nextProps.id === this.props.id) return
         if (nextProps.id) {
@@ -207,13 +220,18 @@ class ManageContent extends React.Component {
                         </Button>
                     </Col>
                     <Col>
-                        <Button
-                            type='danger'
-                            icon='delete'
-                            loading={this.state.deleting}
+                        <Popconfirm
+                            title='删除结果不可撤销'
+                            onConfirm={this.handleDelete}
                         >
-                            删除
-                        </Button>
+                            <Button
+                                type='danger'
+                                icon='delete'
+                                loading={this.state.deleting}
+                            >
+                                删除
+                            </Button>
+                        </Popconfirm>
                     </Col>
                 </Row>
                 <Editor
