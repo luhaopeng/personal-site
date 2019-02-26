@@ -4,6 +4,7 @@ import Editor from '../../for-editor'
 import IconFont from '../../iconfont'
 import { readBlog, createBlog, updateBlog } from '../../../api/blog'
 import { errorMsg } from '../../../utils/common'
+import { saveAs } from 'file-saver'
 
 const { Content } = Layout
 const { Option } = Select
@@ -110,6 +111,13 @@ class ManageContent extends React.Component {
         }
     }
 
+    handleExport = () => {
+        let file = new File([this.state.content], `${this.state.title}.md`, {
+            type: 'text/plain;charset=utf-8'
+        })
+        saveAs(file)
+    }
+
     async componentWillReceiveProps(nextProps) {
         if (nextProps.id === this.props.id) return
         if (nextProps.id) {
@@ -194,7 +202,9 @@ class ManageContent extends React.Component {
                         </Button>
                     </Col>
                     <Col>
-                        <Button icon='export'>导出</Button>
+                        <Button icon='export' onClick={this.handleExport}>
+                            导出
+                        </Button>
                     </Col>
                     <Col>
                         <Button
