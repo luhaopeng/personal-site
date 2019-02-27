@@ -64,6 +64,12 @@ class Manage extends React.Component {
         }
     }
 
+    handleContentChange = (value = undefined) => {
+        page = 0
+        this.refreshList()
+        this.setState({ current: value })
+    }
+
     render() {
         return (
             <Layout>
@@ -92,6 +98,7 @@ class Manage extends React.Component {
                             <ManageContent
                                 id={this.state.current}
                                 auth={this.state.auth}
+                                onChange={this.handleContentChange}
                             />
                             <SiteFooter />
                         </div>

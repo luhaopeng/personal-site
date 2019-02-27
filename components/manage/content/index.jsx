@@ -35,6 +35,11 @@ class ManageContent extends React.Component {
         this.state = initialState
     }
 
+    reportChange = (id = undefined) => {
+        let { onChange } = this.props
+        onChange && typeof onChange === 'function' && onChange(id)
+    }
+
     handleTitleChange = e => {
         this.setState({ title: e.target.value })
     }
@@ -68,6 +73,7 @@ class ManageContent extends React.Component {
             )
                 .then(() => {
                     message.success('发布成功')
+                    this.reportChange(this.props.id)
                 })
                 .catch(error => {
                     message.error(errorMsg(error))
@@ -80,6 +86,10 @@ class ManageContent extends React.Component {
                 { title, content, tags, category, draft: false },
                 { auth: this.props.auth }
             )
+                .then(res => {
+                    message.success('发布成功')
+                    this.reportChange(res.data.id)
+                })
                 .catch(error => {
                     message.error(errorMsg(error))
                 })
@@ -99,6 +109,7 @@ class ManageContent extends React.Component {
             )
                 .then(() => {
                     message.success('草稿已保存')
+                    this.reportChange(this.props.id)
                 })
                 .catch(error => {
                     message.error(errorMsg(error))
@@ -111,8 +122,9 @@ class ManageContent extends React.Component {
                 { title, content, tags, category },
                 { auth: this.props.auth }
             )
-                .then(() => {
+                .then(res => {
                     message.success('草稿已保存')
+                    this.reportChange(res.data.id)
                 })
                 .catch(error => {
                     message.error(errorMsg(error))
@@ -135,6 +147,7 @@ class ManageContent extends React.Component {
         deleteBlog({ id: this.props.id }, { auth: this.props.auth })
             .then(() => {
                 message.success('文章已删除')
+                this.reportChange()
             })
             .catch(error => {
                 message.error(errorMsg(error))
@@ -214,6 +227,10 @@ class ManageContent extends React.Component {
                             type='primary'
                             onClick={this.handlePublish}
                             loading={this.state.publishing}
+                            disabled={
+                                !this.state.title.trim() ||
+                                !this.state.content.trim()
+                            }
                         >
                             <IconFont type='icon-publish' />
                             发布
@@ -224,12 +241,23 @@ class ManageContent extends React.Component {
                             icon='save'
                             onClick={this.handleSave}
                             loading={this.state.saving}
+                            disabled={
+                                !this.state.title.trim() ||
+                                !this.state.content.trim()
+                            }
                         >
                             保存
                         </Button>
                     </Col>
                     <Col>
-                        <Button icon='export' onClick={this.handleExport}>
+                        <Button
+                            icon='export'
+                            onClick={this.handleExport}
+                            disabled={
+                                !this.state.title.trim() ||
+                                !this.state.content.trim()
+                            }
+                        >
                             导出
                         </Button>
                     </Col>
