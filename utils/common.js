@@ -1,14 +1,7 @@
 const toQueryString = obj => {
     return Object.keys(obj)
-        .map(key => {
-            if (obj[key] !== undefined)
-                return (
-                    encodeURIComponent(key) + '=' + encodeURIComponent(obj[key])
-                )
-        })
-        .join(' ')
-        .trim()
-        .split(/\s+/)
+        .filter(k => obj[k] || obj[k] === 0 || obj[k] === false)
+        .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(obj[k]))
         .join('&')
 }
 
