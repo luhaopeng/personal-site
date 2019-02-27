@@ -20,6 +20,8 @@ class Manage extends React.Component {
         super(props)
         this.state = {
             blogList: [],
+            hasMore: false,
+            listLoading: false,
             current: '',
             auth: '',
             verifyError: false,
@@ -27,23 +29,47 @@ class Manage extends React.Component {
         }
     }
 
-    refreshList = async (title = undefined) => {
+    loadList = async (reset = true, title = undefined) => {
+        this.setState({ listLoading: true })
         try {
+            let blogList = this.state.blogList
+            if (reset) {
+                page = 0
+                blogList = []
+            }
             let res = await getBlogList({
                 page,
                 per_page,
                 title,
                 auth: this.state.auth
             })
-            let blogList = res.data.doc
-            this.setState({ blogList })
+            blogList = blogList.concat(res.data.doc)
+            this.setState({
+                blogList,
+                hasMore: res.data.doc.length === per_page
+            })
         } catch (error) {
             message.error(errorMsg(error))
+        } finally {
+            this.setState({ listLoading: false })
         }
+    }
+
+    handleLoadMore = () => {
+        page++
+        this.loadList(false)
     }
 
     handleListClick = item => {
         this.setState({ current: item._id })
+    }
+
+    handleAdd = () => {
+        this.setState({ current: null })
+    }
+
+    handleSearch = value => {
+        this.loadList(true, value)
     }
 
     handleAuth = async value => {
@@ -54,7 +80,7 @@ class Manage extends React.Component {
                 auth: res.data.auth
             })
             message.success('登录成功')
-            this.refreshList()
+            this.loadList()
         } catch (error) {
             if (error.response.status === 401) {
                 this.setState({
@@ -65,8 +91,7 @@ class Manage extends React.Component {
     }
 
     handleContentChange = (value = undefined) => {
-        page = 0
-        this.refreshList()
+        this.loadList()
         this.setState({ current: value })
     }
 
@@ -85,12 +110,14 @@ class Manage extends React.Component {
                 <Layout>
                     <Sider width={240} theme='light'>
                         <BlogList
+                            initLoading={!this.state.auth}
+                            loading={this.state.listLoading}
+                            hasMore={this.state.hasMore}
+                            onLoadMore={this.handleLoadMore}
                             list={this.state.blogList}
                             onClick={this.handleListClick}
-                            onSearch={this.refreshList}
-                            onAdd={() => {
-                                this.setState({ current: null })
-                            }}
+                            onSearch={this.handleSearch}
+                            onAdd={this.handleAdd}
                         />
                     </Sider>
                     <Layout>
