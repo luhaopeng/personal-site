@@ -10,14 +10,6 @@ const SubMenu = Menu.SubMenu
 const MenuItemGroup = Menu.ItemGroup
 
 class SiteHeader extends React.Component {
-    state = {
-        current: 'home'
-    }
-    handleClick = e => {
-        this.setState({
-            current: e.key
-        })
-    }
     render() {
         const logoStyle = {
             fill: '#2c3e50',
@@ -57,13 +49,20 @@ class SiteHeader extends React.Component {
                     <Col>
                         <Menu
                             id='nav'
-                            onClick={this.handleClick}
-                            selectedKeys={[this.state.current]}
+                            selectedKeys={[this.props.current]}
                             mode='horizontal'
                             style={{ marginLeft: 'auto', borderBottom: 'none' }}
                         >
-                            <Menu.Item key='home'>首页</Menu.Item>
-                            <Menu.Item key='article'>文章</Menu.Item>
+                            <Menu.Item key='home'>
+                                <Link href='/'>
+                                    <a>首页</a>
+                                </Link>
+                            </Menu.Item>
+                            <Menu.Item key='archive'>
+                                <Link href='/archive'>
+                                    <a>文章</a>
+                                </Link>
+                            </Menu.Item>
                             <SubMenu title='工具'>
                                 <MenuItemGroup title='DNF'>
                                     <Menu.Item key='tool:luke'>

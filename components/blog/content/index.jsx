@@ -1,4 +1,5 @@
 import React from 'react'
+import { Layout } from 'antd'
 import Title from '../title'
 import Article from '../article'
 import './index.less'
@@ -11,6 +12,7 @@ class Content extends React.Component {
             isLoaded: false
         }
     }
+
     async componentDidMount() {
         let res = await readBlog({ id: this.props.id })
         this.setState({
@@ -18,12 +20,13 @@ class Content extends React.Component {
             ...res.data.doc
         })
     }
+    
     render() {
         return !this.state.isLoaded ? null : (
-            <div className='blog-content'>
+            <Layout.Content className='blog-content'>
                 <Title attr={this.state} />
                 <Article content={this.state.content} />
-            </div>
+            </Layout.Content>
         )
     }
 }
