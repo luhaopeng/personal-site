@@ -11,7 +11,7 @@ class Archive extends React.Component {
         return (
             <Layout>
                 <Head>
-                    <title key='page-title'>归档 - 卢浩鹏的技术日志</title>
+                    <title key='page-title'>文章 - 卢浩鹏的技术日志</title>
                 </Head>
                 <SiteHeader current='archive' />
                 <ArchiveContent />
