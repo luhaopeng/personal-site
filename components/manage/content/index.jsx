@@ -58,6 +58,7 @@ class ManageContent extends React.Component {
 
     handlePublish = () => {
         let { title, content, tags, category } = this.state
+        title = title.trim()
         this.setState({ publishing: true })
         if (this.props.id) {
             updateBlog(
@@ -101,6 +102,7 @@ class ManageContent extends React.Component {
 
     handleSave = () => {
         let { title, content, tags, category } = this.state
+        title = title.trim()
         this.setState({ saving: true })
         if (this.props.id) {
             updateBlog(
@@ -136,9 +138,13 @@ class ManageContent extends React.Component {
     }
 
     handleExport = () => {
-        let file = new File([this.state.content], `${this.state.title}.md`, {
-            type: 'text/plain;charset=utf-8'
-        })
+        let file = new File(
+            [this.state.content],
+            `${this.state.title.trim()}.md`,
+            {
+                type: 'text/plain;charset=utf-8'
+            }
+        )
         saveAs(file)
     }
 
