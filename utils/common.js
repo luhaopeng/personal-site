@@ -1,8 +1,10 @@
 const toQueryString = obj => {
-    return Object.keys(obj)
-        .filter(k => obj[k] || obj[k] === 0 || obj[k] === false)
-        .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(obj[k]))
-        .join('&')
+    if (obj) {
+        return Object.keys(obj)
+            .filter(k => obj[k] || obj[k] === 0 || obj[k] === false)
+            .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(obj[k]))
+            .join('&')
+    }
 }
 
 const errorMsg = error => {
@@ -21,4 +23,15 @@ const errorMsg = error => {
     }
 }
 
-export { toQueryString, errorMsg }
+const translateCategory = category => {
+    switch (category) {
+        case 'article':
+            return '文章'
+        case 'essay':
+            return '随笔'
+        case 'translate':
+            return '翻译'
+    }
+}
+
+export { toQueryString, errorMsg, translateCategory }

@@ -14,7 +14,7 @@ export default () => (
         </Head>
         <SiteHeader />
         <Content style={{ background: '#fff' }}>
-            <BlogContent id='5c50094ab45fe9411c3aae89' />
+            <BlogContent id='5c6d177f689a59c044490a9e' />
         </Content>
         <BackTop />
         <SiteFooter />
