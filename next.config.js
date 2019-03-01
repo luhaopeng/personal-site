@@ -11,6 +11,9 @@ module.exports = withCss(
     withLess({
         lessLoaderOptions: {
             javascriptEnabled: true
+        },
+        stats: {
+            warningsFilter: /Conflicting order between:/
         }
     })
 )
