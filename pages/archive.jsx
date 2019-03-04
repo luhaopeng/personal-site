@@ -3,7 +3,7 @@ import { Layout, BackTop } from 'antd'
 import Head from 'next/head'
 import SiteHeader from '../components/site/header'
 import SiteFooter from '../components/site/footer'
-import ArchiveContent from '../components/archive/content'
+import ArchiveContent from '../components/archive'
 import '../static/style/index.less'
 
 class Archive extends React.Component {
