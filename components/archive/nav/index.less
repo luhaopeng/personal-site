@@ -16,9 +16,14 @@
         white-space: nowrap;
         padding: 0.5rem 1rem;
         margin-bottom: 0.5rem;
+        transition: all linear 0.1s;
+
+        &:hover {
+            background-color: #eaecef;
+        }
 
         &.selected {
-            background-color: #0366d6;
+            background-color: @ant-primary-color;
             color: #fff;
         }
     }

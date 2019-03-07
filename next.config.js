@@ -13,7 +13,7 @@ module.exports = withCss(
             javascriptEnabled: true
         },
         stats: {
-            warningsFilter: /Conflicting order between:/
+            warningsFilter: /Conflicting order between/
         }
     })
 )

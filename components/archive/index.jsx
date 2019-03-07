@@ -7,6 +7,12 @@ import './index.less'
 const { Content } = Layout
 
 class ArchiveContent extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            yearList: ['2019', '2018', '2017', '2016']
+        }
+    }
     render() {
         return (
             <Content className='full-content-height'>
@@ -17,7 +23,7 @@ class ArchiveContent extends React.Component {
                         </Col>
                         <Col span={4}>
                             <Affix offsetTop={40}>
-                                <YearList />
+                                <YearList list={this.state.yearList}/>
                             </Affix>
                         </Col>
                     </Row>
