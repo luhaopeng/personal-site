@@ -48,7 +48,7 @@ class SiteHeader extends React.Component {
             verticalAlign: 'middle'
         }
         return (
-            <MyHeader width={this.props.width}>
+            <MyHeader>
                 <Head>
                     <link
                         key='favicon'
@@ -57,7 +57,7 @@ class SiteHeader extends React.Component {
                         type='image/x-icon'
                     />
                 </Head>
-                <HRow>
+                <HRow width={this.props.width}>
                     <Col>
                         <Link href='/'>
                             <a>

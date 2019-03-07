@@ -1,7 +1,8 @@
 import React from 'react'
 import { Layout, message } from 'antd'
+import styled from 'styled-components'
 import Head from 'next/head'
-import '../static/style/index.less'
+import '../static/style/default.less'
 import SiteHeader from '../components/site/header'
 import AuthModal from '../components/manage/auth-modal'
 import ManageContent from '../components/manage/content'
@@ -10,10 +11,16 @@ import SiteFooter from '../components/site/footer'
 import { getBlogList } from '../api/blog'
 import { verify } from '../api/auth'
 import { errorMsg } from '../utils/common'
+import { site_header_height as header } from '../utils/theme'
 
 const { Sider } = Layout
 let page = 0 // blog list 分页
 const per_page = 5 // blog list 每页数量
+
+const FullDiv = styled.div`
+    height: calc(100vh - ${header});
+    overflow: auto;
+`
 
 class Manage extends React.Component {
     constructor(props) {
@@ -121,14 +128,14 @@ class Manage extends React.Component {
                         />
                     </Sider>
                     <Layout>
-                        <div className='full-height'>
+                        <FullDiv>
                             <ManageContent
                                 id={this.state.current}
                                 auth={this.state.auth}
                                 onChange={this.handleContentChange}
                             />
                             <SiteFooter />
-                        </div>
+                        </FullDiv>
                     </Layout>
                 </Layout>
             </Layout>
