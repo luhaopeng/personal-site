@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { primary_color, transparent } from '../../../utils/theme'
+import { primary_color as primary, transparent } from '../../utils/theme'
 
 const Ul = styled.ul`
     list-style-type: none;
 `
 
-const A = styled.a`
+const Item = styled.div`
     font-size: 12px;
     border-radius: 3px;
     color: ${props => (props.selected ? '#fff' : '#586069')};
@@ -19,9 +19,12 @@ const A = styled.a`
     white-space: nowrap;
     padding: 0.5rem 1rem;
     margin-bottom: 0.5rem;
-    background-color: ${props =>
-        props.selected ? primary_color : transparent};
+    background-color: ${props => (props.selected ? primary : transparent)};
     transition: all linear 0.15s;
+
+    &:hover {
+        background-color: ${props => (props.selected ? primary : '#eaecef')};
+    }
 `
 
 class YearList extends React.Component {
@@ -35,6 +38,8 @@ class YearList extends React.Component {
     handleClick = e => {
         let { key } = e.target.dataset
         this.setState({ selectedKey: key })
+        let onClick = this.props.onClick
+        onClick && typeof onClick === 'function' && onClick(key)
     }
 
     render() {
@@ -43,13 +48,13 @@ class YearList extends React.Component {
                 {['2019', '2018', '2017', '2016'].map(val => {
                     return (
                         <li key={val}>
-                            <A
+                            <Item
                                 data-key={val}
                                 selected={this.state.selectedKey === val}
                                 onClick={this.handleClick}
                             >
                                 {val}
-                            </A>
+                            </Item>
                         </li>
                     )
                 })}

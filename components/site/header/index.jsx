@@ -1,13 +1,44 @@
 import React from 'react'
 import { Layout, Row, Col, Menu, Icon } from 'antd'
+import styled from 'styled-components'
 import Link from 'next/link'
 import Head from 'next/head'
 import ReactSVG from 'react-svg'
+import { Link as MyLink } from '../../common'
 import './index.less'
 
-const { Header } = Layout
+const Item = Menu.Item
 const SubMenu = Menu.SubMenu
 const MenuItemGroup = Menu.ItemGroup
+
+const MyHeader = styled(Layout.Header)`
+    background: #fff;
+    padding: 0;
+    box-shadow: 0 2px 8px #f0f1f2;
+    z-index: 1;
+`
+const HRow = styled(Row).attrs({
+    type: 'flex',
+    justify: 'space-between',
+    align: 'middle'
+})`
+    width: ${props => props.width || '90%'};
+    margin: 0 auto;
+    padding: 0 45px;
+`
+const NavMenu = styled(Menu).attrs({
+    id: 'nav',
+    mode: 'horizontal'
+})`
+    margin-left: auto;
+    border-bottom: none;
+`
+const OutLink = ({ children }) => (
+    <MyLink>
+        <Icon type='link' />
+        {children}
+    </MyLink>
+)
 
 class SiteHeader extends React.Component {
     render() {
@@ -17,7 +48,7 @@ class SiteHeader extends React.Component {
             verticalAlign: 'middle'
         }
         return (
-            <Header className='site-header'>
+            <MyHeader width={this.props.width}>
                 <Head>
                     <link
                         key='favicon'
@@ -26,16 +57,7 @@ class SiteHeader extends React.Component {
                         type='image/x-icon'
                     />
                 </Head>
-                <Row
-                    type='flex'
-                    justify='space-between'
-                    align='middle'
-                    style={{
-                        width: this.props.width || '90%',
-                        margin: '0 auto',
-                        padding: '0 45px'
-                    }}
-                >
+                <HRow>
                     <Col>
                         <Link href='/'>
                             <a>
@@ -47,83 +69,53 @@ class SiteHeader extends React.Component {
                         </Link>
                     </Col>
                     <Col>
-                        <Menu
-                            id='nav'
-                            selectedKeys={[this.props.current]}
-                            mode='horizontal'
-                            style={{ marginLeft: 'auto', borderBottom: 'none' }}
-                        >
-                            <Menu.Item key='home'>
+                        <NavMenu selectedKeys={[this.props.current]}>
+                            <Item key='home'>
                                 <Link href='/'>
                                     <a>首页</a>
                                 </Link>
-                            </Menu.Item>
-                            <Menu.Item key='archive'>
+                            </Item>
+                            <Item key='archive'>
                                 <Link href='/archive'>
                                     <a>文章</a>
                                 </Link>
-                            </Menu.Item>
+                            </Item>
                             <SubMenu title='工具'>
                                 <MenuItemGroup title='DNF'>
-                                    <Menu.Item key='tool:luke'>
-                                        <a
-                                            href='https://www.lhp.one/luke/'
-                                            target='_blank'
-                                            rel='noopener noreferrer'
-                                        >
-                                            <Icon type='link' />
+                                    <Item key='tool:luke'>
+                                        <OutLink href='https://www.lhp.one/luke/'>
                                             卢克排表工具
-                                        </a>
-                                    </Menu.Item>
-                                    <Menu.Item key='tool:hyper'>
-                                        <a
-                                            href='https://www.lhp.one/hyper/'
-                                            target='_blank'
-                                            rel='noopener noreferrer'
-                                        >
-                                            <Icon type='link' />
+                                        </OutLink>
+                                    </Item>
+                                    <Item key='tool:hyper'>
+                                        <OutLink href='https://www.lhp.one/hyper/'>
                                             超时空排表工具
-                                        </a>
-                                    </Menu.Item>
+                                        </OutLink>
+                                    </Item>
                                 </MenuItemGroup>
                                 <MenuItemGroup title='工具说明'>
-                                    <Menu.Item key='tutorial:luke'>
-                                        <a
-                                            href='https://www.lhp.one/essay/tutorial/luke/'
-                                            target='_blank'
-                                            rel='noopener noreferrer'
-                                        >
-                                            <Icon type='link' />
+                                    <Item key='tutorial:luke'>
+                                        <OutLink href='https://www.lhp.one/essay/tutorial/luke/'>
                                             卢克排表工具说明
-                                        </a>
-                                    </Menu.Item>
-                                    <Menu.Item key='tutorial:hyper'>
-                                        <a
-                                            href='https://www.lhp.one/essay/tutorial/hyper/'
-                                            target='_blank'
-                                            rel='noopener noreferrer'
-                                        >
-                                            <Icon type='link' />
+                                        </OutLink>
+                                    </Item>
+                                    <Item key='tutorial:hyper'>
+                                        <OutLink href='https://www.lhp.one/essay/tutorial/hyper/'>
                                             超时空排表工具说明
-                                        </a>
-                                    </Menu.Item>
+                                        </OutLink>
+                                    </Item>
                                 </MenuItemGroup>
                             </SubMenu>
-                            <Menu.Item key='about'>关于</Menu.Item>
-                            <Menu.Item key='github'>
-                                <a
-                                    href='https://github.com/luhaopeng'
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    <Icon type='link' />
+                            <Item key='about'>关于</Item>
+                            <Item key='github'>
+                                <OutLink href='https://github.com/luhaopeng'>
                                     GitHub
-                                </a>
-                            </Menu.Item>
-                        </Menu>
+                                </OutLink>
+                            </Item>
+                        </NavMenu>
                     </Col>
-                </Row>
-            </Header>
+                </HRow>
+            </MyHeader>
         )
     }
 }
