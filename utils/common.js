@@ -12,10 +12,10 @@ const errorMsg = error => {
     console.log(response) // eslint-disable-line
     switch (response.status) {
         case 400:
-            if (/duplicate key/i.test(response.data.msg)) {
+            if (/duplicate key/i.test(response.data.message)) {
                 return '标题不能重复'
             }
-            return response.data.msg
+            return response.data.message
         case 401:
             return '登录过期，请重新登录'
         default:

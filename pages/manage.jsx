@@ -43,10 +43,10 @@ class Manage extends React.Component {
                 title,
                 auth: this.state.auth
             })
-            blogList = blogList.concat(res.data.doc)
+            blogList = blogList.concat(res.data.data.doc)
             this.setState({
                 blogList,
-                hasMore: res.data.doc.length === per_page
+                hasMore: res.data.data.doc.length === per_page
             })
         } catch (error) {
             message.error(errorMsg(error))
@@ -77,7 +77,7 @@ class Manage extends React.Component {
             let res = await verify({ token: value })
             this.setState({
                 showModal: false,
-                auth: res.data.auth
+                auth: res.data.data.auth
             })
             message.success('登录成功')
             this.loadList()

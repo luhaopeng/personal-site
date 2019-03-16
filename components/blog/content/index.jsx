@@ -15,9 +15,10 @@ class Content extends React.Component {
 
     async componentDidMount() {
         let res = await readBlog({ id: this.props.id })
+        console.log(res) // eslint-disable-line
         this.setState({
             isLoaded: true,
-            ...res.data.doc
+            ...res.data.data.doc
         })
     }
     

@@ -89,7 +89,7 @@ class ManageContent extends React.Component {
             )
                 .then(res => {
                     message.success('发布成功')
-                    this.reportChange(res.data.id)
+                    this.reportChange(res.data.data.id)
                 })
                 .catch(error => {
                     message.error(errorMsg(error))
@@ -126,7 +126,7 @@ class ManageContent extends React.Component {
             )
                 .then(res => {
                     message.success('草稿已保存')
-                    this.reportChange(res.data.id)
+                    this.reportChange(res.data.data.id)
                 })
                 .catch(error => {
                     message.error(errorMsg(error))
@@ -180,7 +180,7 @@ class ManageContent extends React.Component {
                     from: 'manage'
                 }
             )
-            let { title, content, tags, category } = data.doc
+            let { title, content, tags, category } = data.data.doc
             this.setState({ title, content, tags, category })
         } else {
             this.setState(initialState)
