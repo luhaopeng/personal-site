@@ -67,7 +67,7 @@ class SiteHeader extends React.Component {
                                 <MenuItemGroup title='DNF'>
                                     <Menu.Item key='tool:luke'>
                                         <a
-                                            href='https://www.lhp.one/luke/'
+                                            href='https://back.luhaopeng.com/luke/'
                                             target='_blank'
                                             rel='noopener noreferrer'
                                         >
@@ -77,7 +77,7 @@ class SiteHeader extends React.Component {
                                     </Menu.Item>
                                     <Menu.Item key='tool:hyper'>
                                         <a
-                                            href='https://www.lhp.one/hyper/'
+                                            href='https://back.luhaopeng.com/hyper/'
                                             target='_blank'
                                             rel='noopener noreferrer'
                                         >
@@ -89,7 +89,7 @@ class SiteHeader extends React.Component {
                                 <MenuItemGroup title='工具说明'>
                                     <Menu.Item key='tutorial:luke'>
                                         <a
-                                            href='https://www.lhp.one/essay/tutorial/luke/'
+                                            href='https://back.luhaopeng.com/essay/tutorial/luke/'
                                             target='_blank'
                                             rel='noopener noreferrer'
                                         >
@@ -99,7 +99,7 @@ class SiteHeader extends React.Component {
                                     </Menu.Item>
                                     <Menu.Item key='tutorial:hyper'>
                                         <a
-                                            href='https://www.lhp.one/essay/tutorial/hyper/'
+                                            href='https://back.luhaopeng.com/essay/tutorial/hyper/'
                                             target='_blank'
                                             rel='noopener noreferrer'
                                         >

@@ -11,7 +11,7 @@ export default () => (
             <title key='page-title'>卢浩鹏的技术日志</title>
         </Head>
         <SiteHeader current='home' />
-        <BlogContent id='5c6d177f689a59c044490a9e' />
+        <BlogContent id='5c822c1413e498547c5f10bc' />
         <BackTop />
         <SiteFooter />
     </Layout>
