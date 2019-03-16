@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout } from 'antd'
+import { Layout, Empty } from 'antd'
 import Title from '../title'
 import Article from '../article'
 import './index.less'
@@ -15,15 +15,16 @@ class Content extends React.Component {
 
     async componentDidMount() {
         let res = await readBlog({ id: this.props.id })
-        console.log(res) // eslint-disable-line
         this.setState({
             isLoaded: true,
             ...res.data.data.doc
         })
     }
-    
+
     render() {
-        return !this.state.isLoaded ? null : (
+        return !this.state.isLoaded ? (
+            <Empty />
+        ) : (
             <Layout.Content className='blog-content'>
                 <Title attr={this.state} />
                 <Article content={this.state.content} />

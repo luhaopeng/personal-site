@@ -12,8 +12,8 @@ class YearList extends React.Component {
     handleClick = e => {
         let { key } = e.target.dataset
         this.setState({ selectedKey: key })
-        let onClick = this.props.onClick
-        onClick && typeof onClick === 'function' && onClick(key)
+        let onSelect = this.props.onSelect
+        onSelect && typeof onSelect === 'function' && onSelect(key)
     }
 
     render() {

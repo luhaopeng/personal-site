@@ -1,11 +1,22 @@
 import React from 'react'
 import { Timeline, Icon } from 'antd'
+import dayjs from 'dayjs'
 import './index.less'
 
 const green = '#3eaf7c'
 
 class BlogTimeline extends React.Component {
     render() {
+        let timeline = []
+        let { list } = this.props
+        list.map(doc => {
+            timeline.push(
+                <Timeline.Item key={doc._id}>
+                    {doc.title}&nbsp;&nbsp;
+                    <small>{dayjs(doc.time).format('YYYY-MM-DD HH:mm:ss')}</small>
+                </Timeline.Item>
+            )
+        })
         return (
             <Timeline
                 className='timeline'
@@ -15,31 +26,14 @@ class BlogTimeline extends React.Component {
                         style={{ color: green, fontSize: '16px' }}
                     />
                 }
-                pending={<span style={{ color: green }}>今天</span>}
+                pending={
+                    this.props.current && (
+                        <span style={{ color: green }}>今天</span>
+                    )
+                }
                 reverse
             >
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>
-                    Solve initial network problems 2015-09-01
-                </Timeline.Item>
-                <Timeline.Item>Technical testing 2015-09-01</Timeline.Item>
+                {timeline}
             </Timeline>
         )
     }

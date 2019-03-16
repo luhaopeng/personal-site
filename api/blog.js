@@ -6,7 +6,11 @@ const ajax = axios.create({
     timeout: 10000
 })
 
-const getBlogList = query => ajax.get(`/list?${toQueryString(query)}`)
+const getArchive = () => ajax.get('/archive')
+
+const getBlogListYear = data => ajax.get(`/list/year/${data.year}`)
+
+const getBlogListAll = query => ajax.get(`/list/all?${toQueryString(query)}`)
 
 const readBlog = (data, query) =>
     ajax.get(`/${data.id}?${toQueryString(query)}`)
@@ -19,4 +23,12 @@ const updateBlog = (data, query) =>
 const deleteBlog = (data, query) =>
     ajax.delete(`/${data.id}?${toQueryString(query)}`, data)
 
-export { getBlogList, createBlog, readBlog, updateBlog, deleteBlog }
+export {
+    getArchive,
+    getBlogListYear,
+    getBlogListAll,
+    createBlog,
+    readBlog,
+    updateBlog,
+    deleteBlog
+}

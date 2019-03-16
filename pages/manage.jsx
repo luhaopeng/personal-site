@@ -7,7 +7,7 @@ import AuthModal from '../components/manage/auth-modal'
 import ManageContent from '../components/manage/content'
 import BlogList from '../components/manage/blog-list'
 import SiteFooter from '../components/site/footer'
-import { getBlogList } from '../api/blog'
+import { getBlogListAll } from '../api/blog'
 import { verify } from '../api/auth'
 import { errorMsg } from '../utils/common'
 
@@ -37,16 +37,16 @@ class Manage extends React.Component {
                 page = 0
                 blogList = []
             }
-            let res = await getBlogList({
+            let res = await getBlogListAll({
                 page,
                 per_page,
                 title,
                 auth: this.state.auth
             })
-            blogList = blogList.concat(res.data.data.doc)
+            blogList = blogList.concat(res.data.data.docs)
             this.setState({
                 blogList,
-                hasMore: res.data.data.doc.length === per_page
+                hasMore: res.data.data.docs.length === per_page
             })
         } catch (error) {
             message.error(errorMsg(error))
