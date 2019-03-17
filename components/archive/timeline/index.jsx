@@ -12,7 +12,7 @@ class BlogTimeline extends React.Component {
         list.map(doc => {
             timeline.push(
                 <Timeline.Item key={doc._id}>
-                    {doc.title}&nbsp;&nbsp;
+                    <a>{doc.title}&nbsp;&nbsp;</a>
                     <small>{dayjs(doc.time).format('YYYY-MM-DD HH:mm:ss')}</small>
                 </Timeline.Item>
             )
