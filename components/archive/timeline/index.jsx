@@ -1,5 +1,6 @@
 import React from 'react'
 import { Timeline, Icon } from 'antd'
+import Link from 'next/link'
 import dayjs from 'dayjs'
 import './index.less'
 
@@ -12,8 +13,12 @@ class BlogTimeline extends React.Component {
         list.map(doc => {
             timeline.push(
                 <Timeline.Item key={doc._id}>
-                    <a>{doc.title}&nbsp;&nbsp;</a>
-                    <small>{dayjs(doc.time).format('YYYY-MM-DD HH:mm:ss')}</small>
+                    <Link href={{ pathname: '/blog', query: { id: doc._id } }}>
+                        <a>{doc.title}&nbsp;&nbsp;</a>
+                    </Link>
+                    <small>
+                        {dayjs(doc.time).format('YYYY-MM-DD HH:mm:ss')}
+                    </small>
                 </Timeline.Item>
             )
         })
