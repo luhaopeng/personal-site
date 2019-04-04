@@ -14,7 +14,7 @@ class Blog extends React.Component {
                 <Head>
                     <title key='page-title'>卢浩鹏的技术日志</title>
                 </Head>
-                <SiteHeader current='home' />
+                <SiteHeader current='archive' />
                 <BlogContent id={this.props.router.query.id} />
                 <BackTop />
                 <SiteFooter />
