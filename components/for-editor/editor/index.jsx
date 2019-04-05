@@ -1,12 +1,12 @@
 import React from 'react'
 import { Icon } from 'antd'
 import classNames from 'classnames'
-import './index.less'
 import marked from '../helpers/marked'
 import textInsert from '../helpers/insertText'
 import keydownListen from '../helpers/keydownListen'
 import IconFont from '../../iconfont'
-import 'highlight.js/styles/tomorrow.css'
+import 'highlight.js/styles/xcode.css'
+import './index.less'
 
 class MdEditor extends React.Component {
     constructor(props) {

@@ -13,7 +13,7 @@ class SiteHeader extends React.Component {
     render() {
         const logoStyle = {
             fill: '#2c3e50',
-            height: '2.5rem',
+            height: '40px',
             verticalAlign: 'middle'
         }
         return (
