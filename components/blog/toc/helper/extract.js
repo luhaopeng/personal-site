@@ -7,7 +7,7 @@ const emReg = /_([^\s_])_(?!_)|\*([^\s*"<[])\*(?!\*)|_([^\s][\s\S]*?[^\s_])_(?!_
 
 function extract(src) {
     src = lexer(src)
-    let titles = String.prototype.match.call(src, titleReg)
+    let titles = String.prototype.match.call(src, titleReg) || []
     let slugger = new Slugger()
     return titles.map(function categorize(val) {
         let hashTag = val.match(hashReg)[0]
