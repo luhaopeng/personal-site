@@ -1,0 +1,43 @@
+.pager {
+    margin: 0 48px;
+    border-top: 1px solid #ebedf0;
+    display: flex;
+    justify-content: space-between;
+
+    a {
+        height: 72px;
+        line-height: 72px;
+
+        .icon {
+            position: relative;
+            color: #697b8c;
+            font-size: 12px;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+
+            &.prev-icon {
+                left: 0;
+                margin-right: 1em;
+            }
+
+            &.next-icon {
+                right: 0;
+                margin-left: 1em;
+            }
+        }
+
+        &:hover {
+            .icon {
+                color: #1890ff;
+
+                &.prev-icon {
+                    left: -3px;
+                }
+
+                &.next-icon {
+                    right: -3px;
+                }
+            }
+        }
+    }
+}
