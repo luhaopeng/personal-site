@@ -35,20 +35,13 @@ class MdEditor extends React.Component {
         keydownListen(this)
     }
 
-    componentWillUpdate(props, state) {
-        const { f_history } = this.state
-        if (props.value && state.f_history.length === 0) {
-            f_history.push(props.value)
-            this.setState({
-                f_history
-            })
-            this.handleLineIndex(props.value)
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.value !== this.props.value) {
-            this.handleLineIndex(nextProps.value)
+    static getDerivedStateFromProps(nextProps, prevState) {
+        let { value } = nextProps
+        const line = value ? value.split('\n').length : 1
+        if (prevState.line_index !== line) {
+            return { line_index: line }
+        } else {
+            return null
         }
     }
 
@@ -97,9 +90,7 @@ class MdEditor extends React.Component {
 
     handleLineIndex(value) {
         const line_index = value ? value.split('\n').length : 1
-        this.setState({
-            line_index
-        })
+        this.setState({ line_index })
     }
 
     undo = () => {
