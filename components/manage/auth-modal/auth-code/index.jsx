@@ -6,8 +6,7 @@ class AuthCode extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            value: '',
-            error: false
+            value: ''
         }
     }
 
@@ -18,7 +17,9 @@ class AuthCode extends React.Component {
     handleInput = e => {
         let { value } = e.target
         if (!/\D/.test(value)) {
-            this.setState({ value, error: false })
+            let { onChange } = this.props
+            this.setState({ value })
+            typeof onChange === 'function' && onChange(value)
         }
         if (value.length === this.props.length) {
             let { onComplete } = this.props
@@ -34,12 +35,6 @@ class AuthCode extends React.Component {
         this.handleFocus()
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.error) {
-            this.setState({ error: true })
-        }
-    }
-
     render() {
         return (
             <Row
@@ -53,7 +48,7 @@ class AuthCode extends React.Component {
                     <Col span={4} key={index}>
                         <div
                             className={
-                                this.state.error
+                                this.props.error
                                     ? 'digit error'
                                     : index < this.state.value.length
                                         ? 'digit focus'

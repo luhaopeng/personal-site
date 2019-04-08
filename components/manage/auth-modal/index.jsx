@@ -16,6 +16,7 @@ class Authorize extends React.Component {
                 <p>请输入动态密码</p>
                 <AuthCode
                     onComplete={this.props.onComplete}
+                    onChange={this.props.onChange}
                     error={this.props.error}
                 />
             </Modal>

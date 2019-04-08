@@ -169,12 +169,12 @@ class ManageContent extends React.Component {
         }
     }
 
-    async componentWillReceiveProps(nextProps) {
-        if (nextProps.id === this.props.id) return
-        if (nextProps.id) {
+    async componentDidUpdate(prevProps) {
+        if (this.props.id === prevProps.id) return
+        if (this.props.id) {
             let { data } = await readBlog(
                 {
-                    id: nextProps.id
+                    id: this.props.id
                 },
                 {
                     from: 'manage'

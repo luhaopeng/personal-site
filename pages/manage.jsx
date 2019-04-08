@@ -90,6 +90,10 @@ class Manage extends React.Component {
         }
     }
 
+    handleAuthChange = () => {
+        this.setState({ verifyError: false })
+    }
+
     handleContentChange = (value = undefined) => {
         this.loadList()
         this.setState({ current: value })
@@ -105,6 +109,7 @@ class Manage extends React.Component {
                 <AuthModal
                     visible={this.state.showModal}
                     onComplete={this.handleAuth}
+                    onChange={this.handleAuthChange}
                     error={this.state.verifyError}
                 />
                 <Layout>
