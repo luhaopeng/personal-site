@@ -3,7 +3,6 @@ import { Icon } from 'antd'
 import classNames from 'classnames'
 import marked from '../helpers/marked'
 import textInsert from '../helpers/insertText'
-import keydownListen from '../helpers/keydownListen'
 import IconFont from '../../iconfont'
 import 'highlight.js/styles/xcode.css'
 import './index.less'
@@ -20,8 +19,6 @@ class MdEditor extends React.Component {
         this.state = {
             preview: false,
             expand: false,
-            f_history: [],
-            f_history_index: 0,
             line_index: 1
         }
     }
@@ -29,10 +26,6 @@ class MdEditor extends React.Component {
     static defaultProps = {
         placeholder: '请输入内容...',
         lineNum: true
-    }
-
-    componentDidMount() {
-        keydownListen(this)
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -48,7 +41,6 @@ class MdEditor extends React.Component {
     // 输入框改变
     handleChange = e => {
         const value = e.target.value
-        this.saveHistory(value)
         this.props.onChange(value)
     }
 
@@ -60,65 +52,11 @@ class MdEditor extends React.Component {
             : e
         textInsert($vm, type)
         this.props.onChange($vm.value)
-        this.saveHistory($vm.value)
-    }
-
-    // 保存记录
-    saveHistory(value) {
-        let { f_history, f_history_index } = this.state
-        window.clearTimeout(this.currentTimeout)
-        this.currentTimeout = setTimeout(() => {
-            // 撤销后修改，删除当前以后记录
-            if (f_history_index < f_history.length - 1) {
-                f_history.splice(f_history_index + 1)
-            }
-            // 超出记录最多保存数后，滚动储存
-            if (f_history.length >= 20) {
-                f_history.shift()
-            }
-            // 记录当前位置
-            f_history_index = f_history.length
-            f_history.push(value)
-            this.setState({
-                f_history,
-                f_history_index
-            })
-        }, 500)
-        // 行号
-        this.handleLineIndex(value)
     }
 
     handleLineIndex(value) {
         const line_index = value ? value.split('\n').length : 1
         this.setState({ line_index })
-    }
-
-    undo = () => {
-        const { f_history } = this.state
-        let { f_history_index } = this.state
-        f_history_index = f_history_index - 1
-        if (f_history_index < 0) return
-        this.setState({
-            f_history_index
-        })
-        const value = f_history[f_history_index]
-        // 将值传递给父组件
-        this.props.onChange(value)
-        this.handleLineIndex(value)
-    }
-
-    redo = () => {
-        const { f_history } = this.state
-        let { f_history_index } = this.state
-        f_history_index = f_history_index + 1
-        if (f_history_index >= f_history.length) return
-        this.setState({
-            f_history_index
-        })
-        const value = f_history[f_history_index]
-        // 将值传递给父组件
-        this.props.onChange(value)
-        this.handleLineIndex(value)
     }
 
     // 预览
@@ -133,11 +71,6 @@ class MdEditor extends React.Component {
         this.setState({
             expand: !this.state.expand
         })
-    }
-
-    // 保存
-    save = () => {
-        this.props.onSave()
     }
 
     render() {
@@ -177,12 +110,6 @@ class MdEditor extends React.Component {
             <div className={fullscreen}>
                 <div className='for-controlbar'>
                     <ul>
-                        <li onClick={this.undo} title='上一步 (ctrl+z)'>
-                            <IconFont type='icon-undo' />
-                        </li>
-                        <li onClick={this.redo} title='下一步 (ctrl+y)'>
-                            <IconFont type='icon-redo' />
-                        </li>
                         <li
                             data-type='h1'
                             onClick={this.insert}
@@ -232,9 +159,6 @@ class MdEditor extends React.Component {
                         >
                             <IconFont type='icon-code' />
                         </li>
-                        {/* <li onClick={this.save} title='保存 (ctrl+s)'>
-                            <IconFont type='icon-save' />
-                        </li> */}
                     </ul>
                     <ul>
                         <li className={expandActive} onClick={this.expand}>
